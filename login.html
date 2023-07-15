@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FREE WIFI SSN - Log in</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/Montserrat-ExtraBold.ttf" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- two other colors
+
+<body class="lite">
+<body class="dark">
+
+-->
+
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+        function doLogin() {
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
+        }
+
+    </script>
+    $(endif)
+    <div class="ie-fixMinHeight">
+        <div class="main">
+            <div class="wrap animated fadeIn">
+                <form name="login" action="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)"
+                    method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                    <input type="hidden" name="dst" value="$(link-orig)" />
+                    <input type="hidden" name="popup" value="true" />
+                    <div class="logossn">
+                        <img width="150px" src="img/logossn.svg" alt="Logo Sintesa Sinergi Nusantara" />
+                    </div>
+                    <p class="judul">
+                        Kamu Menggunakan<br>WiFi Gratis dari SSN
+                    </p>
+                    $(if error == "")$(if trial == 'yes')$(endif)
+                    $(endif)
+                    <div class="bcenter">
+                        <input type="submit" value="Mulai Sekarang!"
+                            onclick="location.href='$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)';" />
+                    </div>
+                    $(if error)$(error)$(endif)
+                </form>
+                <a class="pt" href="https://www.sintesa.co.id">www.sintesa.co.id</a>
+                    
+                    <div class="gambar responsive">
+                        <img width="400px" src="img/gambar.png" alt="gambar ganteng" />
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
